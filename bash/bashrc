@@ -1,0 +1,75 @@
+#
+# ~/.bashrc
+#
+
+# Source global definitions                                         
+if [ -f /etc/bashrc ]; then                                     
+  . /etc/bashrc      
+fi
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Source host-specific configruations if they exist
+if [ -f $HOME/.bashrc.$HOSTNAME ]; then                                     
+  . $HOME/.bashrc.$HOSTNAME
+fi
+
+# Report the status of background jobs immediately
+set -o notify
+
+# Enable pathname expansion
+shopt -s extglob
+
+# Match '**' with all files and directories
+shopt -s globstar
+
+# Disable completion when the input buffer is empty
+shopt -s no_empty_cmd_completion
+
+# History file configuration
+export HISTFILE=$HOME/.bash_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+# Append to the history list
+shopt -s histappend
+
+# Automatically change directory if only a name is given
+shopt -s autocd
+
+# Fix typos when changing directories
+shopt -s dirspell
+shopt -s cdspell
+
+# Make tab auto-complete and cycle through commands after listing
+bind 'TAB:menu-complete'
+bind 'set show-all-if-ambiguous on'
+bind 'set completion-ignore-case on'
+bind 'set menu-complete-display-prefix on'
+
+complete -A directory cd
+
+# Set prompt
+PS1="\e[1;31m\u\e[0;36m:\e[1;31m\h\e[0;37m \w>\e[00m "
+
+# Neovim is vim
+if ! command -v COMMAND &> /dev/null; then
+  alias vimdiff="nvim -d"
+  alias vim="nvim"
+fi
+
+alias grep="grep --color=auto"
+
+alias dc="cd"
+
+alias du="du -h"
+
+alias ls='ls --color=auto'
+alias ll="ls -l"
+alias la="ls -a"
+
+# Exports
+export EDITOR=vim
+export LS_COLORS=$LS_COLORS:"*.c=01;93"
+export LS_COLORS=$LS_COLORS:"*.cpp=01;93"

@@ -1,0 +1,59 @@
+# Source host-specific configruations if they exist
+if [ -f $HOME/.zshrc.$HOSTNAME ]; then                                     
+  . $HOME/.zshrc.$HOSTNAME
+fi
+
+export PROMPT='%{[1;31m%}%n%{[0;36m%}:%{[1;31m%}%m %{[0;37m%}%~%{[0;36m%}> %{[0m%}'
+unset RPROMPT
+
+# Turn off core dumps
+limit coredumpsize 0
+
+# Set options
+setopt clobber
+setopt nohup
+setopt nobeep
+setopt nocheckjobs
+setopt longlistjobs
+setopt pushdtohome
+setopt pushdsilent
+setopt noflowcontrol
+setopt interactive_comments
+
+# History file configuration
+export HISTFILE=$HOME/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+# Set history settings
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+unsetopt hist_beep
+
+# Colors
+autoload -U colors && colors
+
+# Autocompletion
+autoload -U compinit && compinit
+zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
+
+# Neovim is vim
+if ! command -v COMMAND &> /dev/null; then
+  alias vimdiff="nvim -d"
+  alias vim="nvim"
+fi
+
+alias grep="grep --color=auto"
+
+alias dc="cd"
+
+alias du="du -h"
+
+alias ls='ls --color=auto'
+alias ll="ls -l"
+alias la="ls -a"
+
+export EDITOR=vim
+export LS_COLORS=$LS_COLORS:"*.c=01;93"
+export LS_COLORS=$LS_COLORS:"*.cpp=01;93"
