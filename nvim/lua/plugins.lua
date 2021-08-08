@@ -57,7 +57,7 @@ local lsp_attach = function(client)
   lsp_warning = { severity = 'Warning' }
   set('bo', 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   map('n', '<C-]>', '<cmd>lua vim.lsp.buf.definition()<cr>')
-  map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+  map('n', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<cr>')
   map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev(lsp_error)<cr>')
   map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next(lsp_error)<cr>')
   map('n', '<Leader>gr', '<cmd>lua vim.lsp.buf.references()<cr>')
