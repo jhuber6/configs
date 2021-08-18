@@ -6,6 +6,9 @@ fi
 export PROMPT='%{[1;31m%}%n%{[0;36m%}:%{[1;31m%}%m %{[0;37m%}%~%{[0;36m%}> %{[0m%}'
 unset RPROMPT
 
+# Emacs keybindings
+bindkey -e
+
 # Turn off core dumps
 limit coredumpsize 0
 
@@ -39,7 +42,7 @@ autoload -U compinit && compinit
 zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
 
 # Neovim is vim
-if ! command -v COMMAND &> /dev/null; then
+if command -v nvim &> /dev/null; then
   alias vimdiff="nvim -d"
   alias vim="nvim"
 fi
